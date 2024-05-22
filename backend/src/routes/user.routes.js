@@ -1,0 +1,11 @@
+import { Router } from "express";
+import * as userController from "../controllers/user.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+const router = Router();
+router.route("/register").post(userController.registerUser);
+router.route("/login").post(userController.loginUser);
+router.route("/logout").get(verifyJWT, userController.logoutUser);
+router.route("/update").put(verifyJWT, userController.updateUser);
+router.route("/delete").delete(verifyJWT, userController.deleteUser);
+router.route("/me").get(verifyJWT, userController.loadUser);
+export default router;
